@@ -13,6 +13,9 @@ public class PersonComparator implements Comparator<Person> {
     public int compare(Person o1, Person o2) {
         int lengthSurNameFirstPerson = o1.getSurname().split("\\W").length;
         int lengthSurNameSecondPerson = o2.getSurname().split("\\W").length;
+        if (lengthSurNameFirstPerson > maxWords && lengthSurNameSecondPerson > maxWords) {
+            return Integer.compare(o1.getAge(), o2.getAge());
+        }
         if (lengthSurNameFirstPerson == lengthSurNameSecondPerson) {
             return Integer.compare(o1.getAge(), o2.getAge());
         }
