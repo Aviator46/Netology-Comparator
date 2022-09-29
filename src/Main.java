@@ -1,10 +1,8 @@
 import PersonInformation.Person;
-import PersonInformation.PersonComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.TreeSet;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,7 +13,17 @@ public class Main {
         notablePeoples.add(new Person("Саша", "Батько", 35));
         notablePeoples.add(new Person("Оля", "Кузьмина", 47));
 
-        Collections.sort(notablePeoples, new PersonComparator(3));
+        Collections.sort(notablePeoples, (a, b) -> {
+                    int lengthSurNameFirstPerson = a.getSurname().split("\\W").length;
+                    int lengthSurNameSecondPerson = b.getSurname().split("\\W").length;
+                    int lenght = lengthSurNameSecondPerson - lengthSurNameFirstPerson;
+                    if ((lengthSurNameFirstPerson >= 3 && lengthSurNameSecondPerson >= 3) || lenght == 0) {
+                        return b.getAge() - a.getAge();
+                    } else {
+                        return lenght;
+                    }
+                }
+        );
         System.out.println(notablePeoples);
     }
 }
